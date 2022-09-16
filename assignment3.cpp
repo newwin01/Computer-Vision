@@ -27,7 +27,7 @@ int main(){
   
     subtract(original_moon,moon_croped,moon_final);
     // moon_final = original_moon + (moon_final*0.5);
-    scaleAdd(moon_final,1.0,original_moon,moon_final);
+    scaleAdd(moon_final,0.5,original_moon,moon_final);
     //sharpened image to original image
     moon_final.copyTo(moon_filtered(rect_moon));
     
