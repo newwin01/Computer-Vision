@@ -105,11 +105,12 @@ int main(){
         }
         //avg filtering
         else if(press_real=='a'){
-            cvtColor(frame,frame,CV_BGR2HSV);
-            split(frame,ic);
-            blur(ic[2],ic[2],Size(9,9));
-            merge(ic,final_frame);
-            cvtColor(final_frame,final_frame,CV_HSV2BGR);
+            // cvtColor(frame,frame,CV_BGR2HSV);
+            // split(frame,ic);
+            // blur(ic[2],ic[2],Size(9,9));
+            // merge(ic,final_frame);
+            // cvtColor(final_frame,final_frame,CV_HSV2BGR);
+            blur(frame,final_frame,Size(9,9));
         }
         else if(press_real=='w'){
             final_frame = white_balacing(frame);
