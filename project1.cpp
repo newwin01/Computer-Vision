@@ -45,7 +45,6 @@ int main(){
 		}
         rows = frame.rows;
         cols = frame.cols;
-       
         if (press_real=='n'){//negative conversion
             cvtColor(frame,frame,CV_BGR2HSV);
             split(frame,ic);
@@ -105,18 +104,15 @@ int main(){
         }
         //avg filtering
         else if(press_real=='a'){
-            // cvtColor(frame,frame,CV_BGR2HSV);
-            // split(frame,ic);
-            // blur(ic[2],ic[2],Size(9,9));
-            // merge(ic,final_frame);
-            // cvtColor(final_frame,final_frame,CV_HSV2BGR);
-            blur(frame,final_frame,Size(9,9));
+            cvtColor(frame,frame,CV_BGR2HSV);
+            split(frame,ic);
+            blur(ic[2],ic[2],Size(9,9));
+            merge(ic,final_frame);
+            cvtColor(final_frame,final_frame,CV_HSV2BGR);
+ 
         }
         else if(press_real=='w'){
             final_frame = white_balacing(frame);
-        }
-        else if(press_real==27){
-            exit(-1);
         }
         else if(press_real=='r'){
             final_frame = frame;
@@ -127,7 +123,7 @@ int main(){
         imshow("video",final_frame);
         key = waitKey(delay);
         if(key!=-1){
-            if(key=='n'||key=='g'||key=='h'||key=='s'||key=='c'||key=='a'||key=='w'||key=='r'||key==27)
+            if(key=='n'||key=='g'||key=='h'||key=='s'||key=='c'||key=='a'||key=='w'||key=='r')
                 press_real = key;
         } 
     }

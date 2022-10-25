@@ -72,7 +72,6 @@ int main(){
         p1 = Point(cvRound(x1 + 1000 * (-b1)) ,cvRound(y1 + 1000 * a1)); 
         p2 = Point(cvRound(x1 - 1000 * (-b1)) ,cvRound(y1 - 1000 * a1));
         line(frame, p1, p2, Scalar(0, 0, 255), 3, 8);
-
         HoughLines(canny_right,right_lines,1,(CV_PI/180),60,0,0,120*(CV_PI/180),150*(CV_PI/180));
         average2_rho = 0;
         average2_theta = 0;

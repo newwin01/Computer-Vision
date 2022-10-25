@@ -26,10 +26,11 @@ int main(){
     Mat moon_final;
     
     //subtract and add scale
-    subtract(original_moon,moon_croped,moon_final);
+    // subtract(original_moon,moon_croped,moon_final);
     // moon_final = original_moon + (moon_final*6);
-    scaleAdd(moon_final,6,original_moon,moon_final);
+    // scaleAdd(moon_final,6,original_moon,moon_final);
     //sharpened image to original image
+    moon_final = (1+6)*original_moon-6*moon_croped;
     moon_final.copyTo(moon_filtered(rect_moon));
     
 
