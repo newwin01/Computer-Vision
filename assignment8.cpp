@@ -34,18 +34,24 @@ int main() {
 			cout << "end of video" << endl;
 			break;
 		}
-		if (frame.empty()) {
-			cout << "end of video" << endl;
-			break;
-		}
 		cvtColor(frame, grayframe, COLOR_BGR2GRAY);
 		if (press == 78 || press == 110) {//n,N
 			image = frame.clone();
-			face_classifier.detectMultiScale(grayframe, faces, 1.1, 3, 0, Size(80, 80), Size(90, 90));
-			if (faces.empty()) {
-				continue;	
+			face_classifier.detectMultiScale(grayframe, faces, 1.1, 3, 0, Size(75, 75), Size(100, 100));
+			if (faces.size() > 1) {
+				if (faces[0].area() > faces[1].area()) {
+					i = 0;
+				}
+				else {
+					i = 1;
+				}
 			}
-			i = 0;
+			else {
+				i = 0;
+			}
+			if (faces.empty()) {
+				continue;
+			}
 			Point lb(faces[i].x + faces[i].width, faces[i].y + faces[i].height);
 			Point tr(faces[i].x, faces[i].y);
 			rectangle(image, lb, tr, Scalar(0, 255, 0), 3, 4, 0);
@@ -64,11 +70,21 @@ int main() {
 		}
 		else if (press == 77 || press == 109) {//m,M
 			image = frame.clone();
-			face_classifier.detectMultiScale(grayframe, faces, 1.1, 5, 0, Size(55, 55), Size(60, 60));
+			face_classifier.detectMultiScale(grayframe, faces, 1.1, 3, 0, Size(40, 40), Size(55, 55));
+			if (faces.size() > 1) {
+				if (faces[0].area() > faces[1].area()) {
+					i = 0; 
+				}
+				else {
+					i = 1; 
+				}
+			}
+			else {
+				i = 0;
+			}
 			if (faces.empty()) {
 				continue;
 			}
-			i = 0;
 			Point lb(faces[i].x + faces[i].width, faces[i].y + faces[i].height);
 			Point tr(faces[i].x, faces[i].y);
 			rectangle(image, lb, tr, Scalar(0, 255, 0), 3, 4, 0);
@@ -87,7 +103,18 @@ int main() {
 		}
 		else if (press == 70 || press == 102) {//F,f
 			image = frame.clone();
-			face_classifier.detectMultiScale(grayframe, faces, 1.1, 5, 0, Size(25, 25), Size(40, 40));
+			face_classifier.detectMultiScale(grayframe, faces, 1.1, 3, 0, Size(25, 25), Size(40, 40));
+			if (faces.size() > 1) {
+				if (faces[0].area() < faces[1].area()) {
+					i = 0;
+				}
+				else {
+					i = 1;
+				}
+			}
+			else {
+				i = 0;
+			}
 			if (faces.empty()) {
 				continue;
 			}
@@ -123,6 +150,7 @@ int main() {
 					t_press = 1;
 				}
 				else if ((prev_press == 84 || prev_press == 116) && (t_press == 1)) {
+					destroyWindow("blue");
 					t_press = 0;
 				}
 				else {
