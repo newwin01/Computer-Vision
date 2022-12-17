@@ -16,7 +16,7 @@ int main(){
     vector<Vec4i>hierarchy;
     Mat element = getStructuringElement(MORPH_ELLIPSE, Size(10, 10));
 
-    if (cap.open("Project2.mp4") == 0) {
+    if (cap.open("Project22.mp4") == 0) {
 		cout << "no such file!" << endl;
 		waitKey(0);
 	}
@@ -48,6 +48,6 @@ int main(){
 }
 
 void displayImage(Mat src,String title){
-    putText(src,format("Alert! Moving object!"),Point(0,40),FONT_HERSHEY_SIMPLEX,1,Scalar(0,0,0),1);
+    putText(src,format("Alert! Moving object!"),Point(0,40),FONT_HERSHEY_SIMPLEX,1,Scalar(255,255,255),1);
     imshow(title,src);
 }
