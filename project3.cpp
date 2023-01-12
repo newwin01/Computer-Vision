@@ -50,9 +50,8 @@ int main(){
 
     }
 
-
     //for Moving car
-    Rect car_center(190,0,315,480);
+    Rect car_center(200,0,300,480);
     Mat frame_move;
     Mat frame_center;
     Mat background;
@@ -108,7 +107,7 @@ int main(){
         }
         // Detection
         frame_detect = frame.clone();
-        if(frame_count%8==0){
+        if(frame_count%1==0){
             if (frame_detect.channels() == 4) cvtColor(frame_detect, frame_detect, COLOR_BGRA2BGR);
             Mat inputBlob = blobFromImage(frame_detect, 1 / 255.F, Size(416, 416), Scalar(), true, false); 
             net.setInput(inputBlob, "data"); 
@@ -131,24 +130,18 @@ int main(){
                 String className = objectClass < classNamesVec.size() ? classNamesVec[objectClass] : cv::format("unknown(%d)", objectClass);
                 decision_car=0;
                 decision_human=0;
-                if(p2.y>frame.rows-120||p1.y>frame.rows-120){//p1, p2 location
+                if(p2.y>frame.rows-100||p1.y>frame.rows-100){//p1, p2 location
                     if(className=="car"){
-                        decision_car=1;     
+                        displayCarNearby(frame);  
                     }
                     if(className=="person"){
-                        decision_human=1;
+                        displayHuman(frame);
                     }
                 }
                 Scalar object_roi_color(0, 0 , 255);
                 rectangle(frame, object, object_roi_color);
                 }
             }    
-        }
-        if(decision_car==1){
-            displayCarNearby(frame);
-        }
-        if(decision_human==1){
-            displayHuman(frame);
         }
 
          //Car moving
